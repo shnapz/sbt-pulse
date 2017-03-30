@@ -2,7 +2,7 @@ package pulse.plugin
 
 import sbt._, Keys._
 
-object depenendencies {
+object dependencies {
 
   def _test     (module: ModuleID): ModuleID = module % "test"
   def _provided (module: ModuleID): ModuleID = module % "provided"

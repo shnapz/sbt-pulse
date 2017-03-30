@@ -6,7 +6,6 @@ jdk:
 branches:
   only:
   - master
-sudo: required
 before_script:
 - if [ $TRAVIS_PULL_REQUEST = 'false' ]; then git checkout -qf $TRAVIS_BRANCH; fi
 - if [ $TRAVIS_PULL_REQUEST = 'false' ]; then git config --local user.name impulso-io;
