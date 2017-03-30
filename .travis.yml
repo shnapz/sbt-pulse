@@ -1,0 +1,30 @@
+language: scala
+scala:
+- 2.10.6
+jdk:
+- oraclejdk8
+branches:
+  only:
+  - master
+sudo: required
+before_script:
+- if [ $TRAVIS_PULL_REQUEST = 'false' ]; then git checkout -qf $TRAVIS_BRANCH; fi
+- if [ $TRAVIS_PULL_REQUEST = 'false' ]; then git config --local user.name impulso-io;
+  fi
+- if [ $TRAVIS_PULL_REQUEST = 'false' ]; then git config --local user.email talkto.impulso.io@gmail.com;
+  fi
+script:
+- sbt test
+- find $HOME/.sbt -name "*.lock" | xargs rm
+- find $HOME/.ivy2 -name "ivydata-*.properties" | xargs rm
+after_success:
+- '[ $TRAVIS_PULL_REQUEST = "false" ] && sh "$TRAVIS_BUILD_DIR/bintray.sh" && sbt
+  "release with-defaults"'
+cache:
+  directories:
+  - $HOME/.ivy2/cache
+  - $HOME/.sbt/boot/scala-$TRAVIS_SCALA_VERSION
+env:
+  global:
+  - secure: EmqRBaZzCqD5hLOcfiIsmj2Bx7LIhV48cwmVzPdiGa6U83/bc1H5Alf5wu9T7wR08s6FV/LKbutFBY+Iy5XLg9XSoI7SQC/FgYQt2E+dgwaFVX1UToHpP44FyyAKFCdoEPdsPSt8rEQVEY2BcNB+JbIBfi2PHIyAq1wwtnuCUWU15m85txQ8NAe2Xdptq1Jv/pSVkf1VMP61DD5dR4Bm13PytSVuTn1trJS90qtPc4Tsngqm6xLKRrspVAvcHAT51t3CwJN1K1Z18FavlFCJ2IDA6NIh41qIOpUOY/kFLzL1h24hN8qwMnvmsmPIsjsCoqv5KmiRl/VCFP0ksgtDOcDs9CTAdBBhSUfoR3C29Icd0PuTaorKeKqpcqm2yfdCnVzJwnxMbgpuzCmfqcmV0IZS5CLuYFYdz5xjKMNIo4dRD+YgUcRJCfkBHRVIMQoAyqrQkHKiWtCuEfXz1FHDlKFyp0VHVoObrH4WuuMWSeuwuzr2MSIlDd8taEIVS9DZ/VG9pQQ1E+z6fCtgUKak2b/D5sLNNTNjgCCw5PaJUx16k91mz3JtcMLtOy9v0FYw87cs/qMUIhpEl8PjHPKVRwtU0yTHYgXvuCYtyivB9eLrvCJUkQmBs7f80PIwnc+aku9zOMfoeETsenAyl17XtE43aUh3GL8xsDq5/+a2cUg=
+  - secure: dXXgYa1owufv0J8jGRvQWwXGxp2jM05LE7SHIvAbIjm+/IWthr23oSIUji4fQXMZH0gEOzrmvrCz7bb4qhlnd5fWGDN2dV6MXJI4li0WwsSLjzo+aeYREN/kh5tEGb3BiIQeDRIq3+GccgcVDcdYkH3VlFMjlWhHwn53p+x+k702EcyxlEG1P0Y+L2AihFIwt3OjoDmSJiyn6uude6W8RFaGK2mOchffQ9PrqOpPVb/Rw1X+BQKCXa1nqLImd4X6szSUE8Zzl5WWa0BXoGKJP97pwPjAX+SSfpKRyy+X1mEZtWWKErosN7zI5jbbzdOdHRY8xZTU1oxhw0e/4LQGOQBV0mnySMKKvgMM2oWyo0MnqEIBkyU/lMZvrAsTL8B/Xel0ZDlR50G3nuboyF1zAkmeYgvygyNSWQD6/cluURCq5j+XKVR3sDW+Q3tvo0bBHM2/QgeF+icp5pBQ/y64G4K5y/mPaX4KuktxKEKf5bwyVI1Yage9mA9r4fITfiUxfk9hxgVu9+unjCVQSGxJAOkN+gRkEGdugVYYxeMdTIILVtmDax4+Air+Bk+j+JnKeIkRCVUbWZ5WVXRJoG6ObPYxArygKRTkjHg64GLr1n3WDjZ73vtBtFGkQVo8kXnR3pKFt6/rjaFELf4Rzcu/1iBBKbb5I2WIIpZn9oOfPG4=
