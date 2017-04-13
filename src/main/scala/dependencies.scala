@@ -13,8 +13,36 @@ object dependencies {
     val simulacrum = "0.10.0"
     val commons    = "3.5"
     val cats       = "0.9.0"
-    val fs2        = "0.9.4"
-    val kafka      = "0.10.1.0"
+    object fs2 {
+      val core     = "0.9.4"
+      val cats     = "0.3.0"
+    }
+
+    val kafka      = "0.10.2.0"
+    val log4s = "1.3.4"
+    object twitter {
+      val finagle = "6.42.0"
+    }
+
+    val config  = "1.3.1"
+    val refined = "0.8.0"
+  }
+
+  object typesafe {
+    val config = "com.typesafe" % "config" % versions.config
+  }
+
+  object refined {
+    val core = "eu.timepit" %% "refined" % versions.refined
+  }
+
+  object finagle {
+    val core   = "com.twitter" %% "finagle-http"   % versions.twitter.finagle
+  }
+
+
+  object log4s {
+    val core = "org.log4s" %% "log4s" % versions.log4s
   }
 
   object kafka {
@@ -22,8 +50,9 @@ object dependencies {
   }
 
   object fs2 {
-    val core = "co.fs2" %% "fs2-core" % versions.fs2
-    val io   = "co.fs2" %% "fs2-io"   % versions.fs2
+    val core = "co.fs2" %% "fs2-core" % versions.fs2.core
+    val io   = "co.fs2" %% "fs2-io"   % versions.fs2.core
+    val cats = "co.fs2" %% "fs2-cats" % versions.fs2.cats
   }
 
   object cats {
