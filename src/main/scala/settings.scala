@@ -15,7 +15,11 @@ object settings {
   import extensions._
   import systemprops._
 
-  def common = compiler ++ console ++ release
+  def common = compiler ++ console ++ release ++ resolution
+
+  private lazy val resolution = Seq(
+    resolvers += Resolver.bintrayRepo("impulse-io", "maven")
+  )
 
   private lazy val compilerFlags = Seq(
     "-deprecation",
