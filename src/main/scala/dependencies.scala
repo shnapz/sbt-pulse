@@ -13,6 +13,7 @@ object dependencies {
     val simulacrum = "0.10.0"
     val commons    = "3.5"
     val cats       = "0.9.0"
+    val sl4j       = "1.7.25"
     object fs2 {
       val core     = "0.9.4"
       val cats     = "0.3.0"
@@ -40,6 +41,9 @@ object dependencies {
     val core   = "com.twitter" %% "finagle-http"   % versions.twitter.finagle
   }
 
+  object sl4j {
+    val simple = "org.slf4j" % "slf4j-simple" % versions.sl4j
+  }
 
   object log4s {
     val core = "org.log4s" %% "log4s" % versions.log4s
